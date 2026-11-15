@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="rgb(4,6,14)">
+<title>star-wing</title>
+<style>
+  :root {
+    --ink: rgb(214, 236, 255);
+    --dim: rgba(150, 180, 210, 0.55);
+    --bg: rgb(4, 6, 14);
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    overscroll-behavior: none;
+    touch-action: none;
+  }
+
+  /* The whole screen is the playfield: one canvas, no letterbox chrome. */
+  #board {
+    display: block;
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--bg);
+    cursor: crosshair;
+    touch-action: none;
+  }
+
+  /* Static legend. The in-game HUD and toasts are drawn on the canvas; this is
+     only the "what do I press" crib that lives outside the render loop. */
+  #hint {
+    position: fixed;
+    left: 14px;
+    bottom: 12px;
+    z-index: 2;
+    max-width: 46vw;
+    pointer-events: none;
+    user-select: none;
+    font-size: 11px;
+    line-height: 1.5;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--dim);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+  }
+
+  #hint kbd {
+    display: inline-block;
+    min-width: 1.1em;
+    padding: 1px 4px;
+    margin-right: 2px;
+    border: 1px solid rgba(150, 190, 225, 0.3);
+    border-radius: 4px;
+    background: rgba(120, 170, 220, 0.1);
+    font: inherit;
+    color: rgba(200, 228, 250, 0.75);
+  }
+
+  @media (max-width: 640px) {
+    #hint { font-size: 10px; max-width: 70vw; }
+  }
+</style>
+</head>
+<body>
+  <canvas id="board"></canvas>
+  <div id="hint">
+    <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> fly &nbsp;·&nbsp;
+    <kbd>space</kbd> cannon &nbsp;·&nbsp; <kbd>F</kbd> missiles &nbsp;·&nbsp;
+    <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd> upgrade &nbsp;·&nbsp;
+    <kbd>P</kbd> pause &nbsp;·&nbsp; <kbd>R</kbd> restart &nbsp;·&nbsp;
+    <kbd>M</kbd> mute
+  </div>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
